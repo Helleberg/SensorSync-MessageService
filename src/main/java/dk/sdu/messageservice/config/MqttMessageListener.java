@@ -35,10 +35,10 @@ public class MqttMessageListener implements MqttCallback {
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         MqttResponse response = new MqttResponse(topic, message.getPayload());
 
+        DeviceDTO device = objectMapper.readValue(response.getMessage(), DeviceDTO.class);
+
         if ("devices/new".equals(response.getTopic())) {
             log.info("Trying to convert message to DeviceDTO...");
-            DeviceDTO device = objectMapper.readValue(response.getMessage(), DeviceDTO.class);
-            System.out.println(device.toString());
             try {
                 deviceServiceInterface.save(device);
                 log.info("Device stored in the device service Database...");
@@ -48,7 +48,13 @@ public class MqttMessageListener implements MqttCallback {
             }
 
         } else if ("lifecycle/status".equals(response.getTopic())) {
-            System.out.println("Got lifecycle status: " + Arrays.toString(response.getMessage()));
+            try {
+                deviceServiceInterface.update(device, device.getHardware_id());
+                log.info("Updated lastPing for device: {}", device.getHardware_id());
+            } catch (Exception e) {
+                log.warn("Could not update the device lastPing...");
+                e.printStackTrace();
+            }
         }
     }
 
