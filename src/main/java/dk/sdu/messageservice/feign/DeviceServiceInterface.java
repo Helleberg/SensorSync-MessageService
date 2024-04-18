@@ -10,12 +10,12 @@ import java.util.UUID;
 @FeignClient("DEVICE-SERVICE")
 public interface DeviceServiceInterface {
     // CREATE
-    @PostMapping("api/v1/devices")
+    @PostMapping("/devices")
     @ResponseStatus(HttpStatus.CREATED)
     public DeviceDTO save(@RequestBody DeviceDTO device);
 
     // UPDATE
-    @PutMapping("api/v1/devices/{uuid}")
+    @PutMapping("/devices/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public DeviceDTO update(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
 }
