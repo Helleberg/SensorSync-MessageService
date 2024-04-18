@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@FeignClient("DEVICE-SERVICE")
+@FeignClient("device-service")
 public interface DeviceServiceInterface {
     // CREATE
-    @PostMapping("/devices")
+    @PostMapping("api/v1/devices")
     @ResponseStatus(HttpStatus.CREATED)
     public DeviceDTO save(@RequestBody DeviceDTO device);
 
     // UPDATE
-    @PutMapping("/devices/{uuid}")
+    @PutMapping("api/v1/devices/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public DeviceDTO update(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
 }
