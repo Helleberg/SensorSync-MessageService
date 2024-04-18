@@ -41,6 +41,7 @@ public class MqttConfig {
 
     @Bean
     public MqttClient mqttClient(MqttConnectOptions options) throws MqttException {
+        log.info("tcp://{}:{}", brokerUrl, brokerPort);
         MqttClient client = new MqttClient("tcp://"+brokerUrl+":"+brokerPort, clientId);
         client.setCallback(messageListener);
         try {
