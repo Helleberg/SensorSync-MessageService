@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@FeignClient("device-service")
+@FeignClient("DEVICE-SERVICE")
 public interface DeviceServiceInterface {
     // CREATE
     @PostMapping("api/v1/devices")
