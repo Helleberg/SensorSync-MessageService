@@ -15,7 +15,7 @@ public interface DeviceServiceInterface {
     public DeviceDTO save(@RequestBody DeviceDTO device);
 
     // UPDATE
-    @PutMapping("api/v1/devices/{uuid}")
+    @PutMapping("api/v1/devices/{uuid}/lastping")
     @ResponseStatus(HttpStatus.OK)
-    public DeviceDTO update(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
+    public DeviceDTO updateLastPing(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
 }

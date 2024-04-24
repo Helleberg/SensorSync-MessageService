@@ -46,7 +46,7 @@ public class MqttMessageListener implements MqttCallback {
 
         } else if ("lifecycle/status".equals(response.getTopic())) {
             try {
-                deviceServiceInterface.update(device, device.getHardware_id());
+                deviceServiceInterface.updateLastPing(device, device.getHardware_id());
                 log.info("Updated lastPing for device: {}", device.getHardware_id());
             } catch (Exception e) {
                 log.warn("Could not update the device lastPing...");
