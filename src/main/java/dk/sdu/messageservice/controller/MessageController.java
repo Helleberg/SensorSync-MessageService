@@ -18,7 +18,7 @@ public class MessageController {
     MqttService mqttService;
 
     // TELL ESP THAT THERE IS AN FIRMWARE UPDATE READY
-    @PostMapping("/message/update")
+    @PostMapping("/mqtt/device/update")
     @ResponseStatus(HttpStatus.OK)
     public void updateFirmware(@RequestBody UpdateFirmwareRequest updateFirmwareRequest) {
         try {
