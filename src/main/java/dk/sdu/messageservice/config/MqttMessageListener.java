@@ -34,7 +34,6 @@ public class MqttMessageListener implements MqttCallback {
         MqttResponse response = new MqttResponse(topic, message.getPayload());
 
         DeviceDTO device = objectMapper.readValue(response.getMessage(), DeviceDTO.class);
-
         if ("devices/new".equals(response.getTopic())) {
             log.info("Trying to convert message to DeviceDTO...");
             try {
