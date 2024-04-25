@@ -21,6 +21,7 @@ public class MessageController {
     @PostMapping("/mqtt/device/update")
     @ResponseStatus(HttpStatus.OK)
     public void updateFirmware(@RequestBody UpdateFirmwareRequest updateFirmwareRequest) {
+        System.out.println(updateFirmwareRequest);
         try {
             // Generate message
             JSONObject message = new JSONObject();
