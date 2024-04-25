@@ -13,6 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateFirmwareRequest {
     public String toit_firmware_version;
-    public String uuid;
+    public UUID uuid;
     public String jwt;
 }
