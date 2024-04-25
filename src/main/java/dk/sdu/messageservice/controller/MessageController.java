@@ -25,11 +25,11 @@ public class MessageController {
         try {
             // Generate message
             JSONObject message = new JSONObject();
-            message.put("uuid", updateFirmwareRequest.getDeviceUUID());
+            message.put("uuid", updateFirmwareRequest.getUuid());
             message.put("jwt", updateFirmwareRequest.getJwt());
-            System.out.println("Publishing to: firmware/update/" + updateFirmwareRequest.getDeviceUUID().toString());
+            System.out.println("Publishing to: firmware/update/" + updateFirmwareRequest.getUuid());
             System.out.println("With message: " + message);
-            mqttService.publish("firmware/update/" + updateFirmwareRequest.getDeviceUUID().toString(), message.toString(), 1, false);
+            mqttService.publish("firmware/update/" + updateFirmwareRequest.getUuid(), message.toString(), 1, false);
 
         } catch (Exception e) {
             log.error(e.getMessage());

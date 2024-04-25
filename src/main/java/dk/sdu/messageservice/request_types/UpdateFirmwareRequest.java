@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateFirmwareRequest {
-    public UUID deviceUUID;
+    public String toit_firmware_version;
+    public String uuid;
     public String jwt;
 }
