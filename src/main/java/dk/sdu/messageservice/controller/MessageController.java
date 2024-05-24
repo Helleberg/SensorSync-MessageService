@@ -21,13 +21,17 @@ public class MessageController {
     @PostMapping("/mqtt/device/update")
     @ResponseStatus(HttpStatus.OK)
     public void updateFirmware(@RequestBody UpdateFirmwareRequest updateFirmwareRequest) {
+        System.out.println(updateFirmwareRequest);
+        // When a firmware file is generated, to firmware service sends a request to this endpoint
+        // which should publish the firmware request to a topic containing the target device uuid.
         try {
             // Generate message
             JSONObject message = new JSONObject();
-            message.put("uuid", updateFirmwareRequest.getDeviceUUID());
-            message.put("jwt", updateFirmwareRequest.getJwt());
-
-            mqttService.publish("firmware/update/" + updateFirmwareRequest.getDeviceUUID(), message.toString(), 1, false);
+            message.put("uuid", updateFirmwareRequest.getUuid());
+            message.put("token", updateFirmwareRequest.getToken());
+            System.out.println("Publishing to: firmware/update/" + updateFirmwareRequest.getUuid());
+            System.out.println("With message: " + message);
+            mqttService.publish("firmware/update/" + updateFirmwareRequest.getUuid(), message.toString(), 1, false);
 
         } catch (Exception e) {
             log.error(e.getMessage());
