@@ -18,10 +18,18 @@ public class DeviceDTO {
     @JsonProperty("athena_version")
     private String athenaVersion;
 
-    public DeviceDTO(UUID hardware_id, String athenaVersion, String firmwareVersion) {
+    @JsonProperty("ip_address")
+    private String ipAddress;
+
+    @JsonProperty("jaguar_port")
+    private int jaguarPort;
+
+    public DeviceDTO(UUID hardware_id, String athenaVersion, String firmwareVersion, String ipAddress, int jaguarPort) {
         this.hardware_id = hardware_id;
         this.athenaVersion = athenaVersion;
         this.firmwareVersion = firmwareVersion;
+        this.ipAddress = ipAddress;
+        this.jaguarPort = jaguarPort;
     }
 
     @Override
@@ -30,6 +38,8 @@ public class DeviceDTO {
                 "hardwareId='" + hardware_id + '\'' +
                 ", athenaVersion='" + athenaVersion + '\'' +
                 ", firmwareVersion='" + firmwareVersion + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", jaguarPort='" + jaguarPort + '\'' +
                 '}';
     }
 }
