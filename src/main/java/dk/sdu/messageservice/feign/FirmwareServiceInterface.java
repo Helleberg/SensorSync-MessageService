@@ -11,7 +11,7 @@ import java.util.UUID;
 @FeignClient("FIRMWARE-SERVICE")
 public interface FirmwareServiceInterface {
     // DELETE FIRMWARE FOLDER AFTER UPDATE
-    @GetMapping("/firmware/delete/{uuid}")
+    @GetMapping("api/v1//firmware/delete/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     void deleteFirmwareVersion(@PathVariable("uuid") UUID uuid);
 }
