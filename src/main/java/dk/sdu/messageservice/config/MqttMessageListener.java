@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.sdu.messageservice.entity.DeviceDTO;
 import dk.sdu.messageservice.entity.MqttResponse;
 import dk.sdu.messageservice.feign.DeviceServiceInterface;
-import dk.sdu.messageservice.feign.FirmwareServiceInterface;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -20,9 +19,6 @@ public class MqttMessageListener implements MqttCallback {
 
     @Autowired
     DeviceServiceInterface deviceServiceInterface;
-
-    @Autowired
-    FirmwareServiceInterface firmwareServiceInterface;
 
     public MqttMessageListener(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -54,14 +50,6 @@ public class MqttMessageListener implements MqttCallback {
                 log.info("Updated lastPing for device: {}", device.getHardware_id());
             } catch (Exception e) {
                 log.warn("Could not update the device lastPing...");
-                e.printStackTrace();
-            }
-        } else if ("firmware/delete".equals(response.getTopic())) {
-            try {
-                firmwareServiceInterface.deleteFirmwareVersion(device.getHardware_id());
-                log.info("Firmware folder delete request for: {}", device.getHardware_id());
-            } catch (Exception e) {
-                log.warn("Could not delete firmware folder...");
                 e.printStackTrace();
             }
         }
