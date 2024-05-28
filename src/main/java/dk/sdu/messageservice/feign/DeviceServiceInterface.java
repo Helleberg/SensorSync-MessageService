@@ -12,10 +12,10 @@ public interface DeviceServiceInterface {
     // CREATE
     @PostMapping("api/v1/devices")
     @ResponseStatus(HttpStatus.CREATED)
-    public DeviceDTO save(@RequestBody DeviceDTO device);
+    DeviceDTO save(@RequestBody DeviceDTO device);
 
     // UPDATE
     @PutMapping("api/v1/devices/{uuid}/lastping")
     @ResponseStatus(HttpStatus.OK)
-    public DeviceDTO updateLastPing(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
+    DeviceDTO updateLastPing(@RequestBody DeviceDTO device, @PathVariable UUID uuid);
 }
