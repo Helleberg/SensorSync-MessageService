@@ -33,7 +33,7 @@ public class MessageController {
             message.put("token", updateFirmwareRequest.getToken());
             System.out.println("Publishing to: firmware/update/" + updateFirmwareRequest.getUuid());
             System.out.println("With message: " + message);
-            mqttService.publish("firmware/update/" + updateFirmwareRequest.getUuid(), message.toString(), 1, false);
+            mqttService.publish("firmware/update/" + updateFirmwareRequest.getUuid(), message.toString(), 0, false);
 
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -45,7 +45,7 @@ public class MessageController {
     public void identifyDevice(UUID uuid) {
         try {
             // Generate message
-            mqttService.publish("devices/" + uuid + "/identify", "", 1, false);
+            mqttService.publish("devices/" + uuid + "/identify", "", 0, false);
 
         } catch (Exception e) {
             log.error(e.getMessage());
