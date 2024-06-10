@@ -40,7 +40,7 @@ public class MessageController {
         }
     }
 
-    @GetMapping("mqtt/device/identify")
+    @GetMapping("mqtt/{uuid}/identify")
     @ResponseStatus(HttpStatus.OK)
     public void identifyDevice(UUID uuid) {
         try {
