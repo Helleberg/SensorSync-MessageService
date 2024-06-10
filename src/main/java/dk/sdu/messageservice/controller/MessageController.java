@@ -45,6 +45,7 @@ public class MessageController {
     public void identifyDevice(UUID uuid) {
         try {
             // Generate message
+            log.info("Identifying device: {} on topic: {}", uuid, "devices/" + uuid + "/identify");
             JSONObject message = new JSONObject();
             message.put("uuid", uuid);
             mqttService.publish("devices/" + uuid + "/identify", message.toString(), 0, false);
