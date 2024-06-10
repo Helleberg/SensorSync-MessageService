@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/v1")
 public class MessageController {
@@ -32,6 +34,18 @@ public class MessageController {
             System.out.println("Publishing to: firmware/update/" + updateFirmwareRequest.getUuid());
             System.out.println("With message: " + message);
             mqttService.publish("firmware/update/" + updateFirmwareRequest.getUuid(), message.toString(), 1, false);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    @GetMapping("mqtt/device/identify")
+    @ResponseStatus(HttpStatus.OK)
+    public void identifyDevice(UUID uuid) {
+        try {
+            // Generate message
+            mqttService.publish("devices/" + uuid + "/identify", "", 1, false);
 
         } catch (Exception e) {
             log.error(e.getMessage());
