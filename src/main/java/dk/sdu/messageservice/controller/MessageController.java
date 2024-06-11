@@ -42,7 +42,7 @@ public class MessageController {
 
     @GetMapping("mqtt/{uuid}/identify")
     @ResponseStatus(HttpStatus.OK)
-    public void identifyDevice(UUID uuid) {
+    public void identifyDevice(@PathVariable UUID uuid) {
         try {
             // Generate message
             log.info("Identifying device: {} on topic: {}", uuid, "devices/" + uuid + "/identify");
